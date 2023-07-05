@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <form id="todo" onsubmit="return onSubmitTodo(this);">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="content" placeholder="할 일을 입력하세요.">
+            <button class="btn btn-outline-violet" type="submit" id="button-addon2">
+                <span class="material-icons">
+                    add
+                </span>
+            </button>
+        </div>
+    </form>
+
+    <div>
+        <a href="javascript:onSortClick('asc');">
+                <span class="material-icons">
+                    arrow_upward
+                </span>
+        </a>
+        <a href="javascript:onSortClick('desc');">
+                <span class="material-icons">
+                    arrow_downward
+                </span>
+        </a>
+    </div>
+
+    <div id="todo-group" class="list-group">
+    </div>
+</div>
+</body>
+
+<script>
+    window.onload = () => {
+        //TODO: ajax로 사용자의 모든 todo 가져와서 todo-group에 추가
+    }
+    let todoCount = 0;
+
+    function onSubmitTodo(form) {
+        //TODO: 아무 내용 없을 때는 아무 동작 안하기
+        onAddTodoGroup(todoCount++, form.content.value, false);
+
+        return false;
+    }
+
+    function onAddTodoGroup(todoIdx, todoContent, todoDone) {
+        const todoGroup = document.getElementById("todo-group");
+        const newTodoItem = makeTodoItem(todoIdx, todoContent, todoDone);
+
+        todoGroup.innerHTML += newTodoItem;
+    }
+
+    function makeTodoItem(todoIdx, todoContent, todoDone) {
+        return `
+            <label id="todo-${todoIdx}" class="input-group ${todoDone ? 'todo-done' : ''}">
+                    <div class="form-control">
+                       <input class="form-check-input me-1" type="checkbox" value onchange="onCheckTodo(this);" ${todoDone ? "checked" : ""}>
+                        ${todoContent}
+                    </div>
+                    <button class="btn btn-outline-success" type="button">
+                        <span class="material-icons">
+                            edit
+                        </span>
+                    </button>
+                    <button class="btn btn-outline-danger" type="button">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
+            </label>
+        `;
+    }
+
+    function onCheckTodo(checkedTodo) {
+        const parent = checkedTodo.parentElement.parentElement;
+
+        if (checkedTodo.checked) {
+            parent.classList.add("todo-done");
+        } else {
+            parent.classList.remove("todo-done");
+        }
+    }
+
+    function onSortClick(sort) {
+        //TODO:
+    }
+</script>
+
+</html>
+
+<style>
+    .container {
+        margin-top: 50px;
+        max-width: 40%;
+    }
+
+    .btn-outline-violet {
+        border-color: blueviolet;
+        color: blueviolet;
+    }
+
+    .btn-outline-violet:hover {
+        border-color: blueviolet;
+        background: blueviolet;
+        color: white;
+    }
+
+    .todo-done {
+        text-decoration: line-through;
+    }
+</style>

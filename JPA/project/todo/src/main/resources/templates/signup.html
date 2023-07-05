@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheet/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <form class="form-signin" onsubmit="return onSubmitSignUp(this);">
+        <div class="intro">
+            <h3 class="form-signin-heading">회원가입</h3>
+        </div>
+        <input type="text" class="form-control" name="userId" placeholder="ID" onchange="onChangeInput(this)"
+               maxlength="15" required autofocus/>
+        <input type="text" class="form-control" name="userNickname" placeholder="닉네임" maxlength="15" required/>
+        <input type="password" class="form-control" name="userPassword" placeholder="비밀번호"
+               onchange="onChangeInput(this)" maxlength="20" required/>
+        <input type="password" class="form-control" name="userValidatePassword" placeholder="비밀번호 재입력"
+               onchange="onChangeInput(this)" maxlength="20" required/>
+        <p id="id-msg" class="alert-msg">이미 존재하는 아이디입니다.</p>
+        <p id="id-length-msg" class="alert-msg">아이디는 4~15자만 허용됩니다.</p>
+        <p id="nickname-msg" class="alert-msg">이미 존재하는 닉네임입니다.</p>
+        <p id="nickname-length-msg" class="alert-msg">닉네임은 4~15자만 허용됩니다.</p>
+        <p id="pwd-msg" class="alert-msg">비밀번호가 일치하지 않습니다.</p>
+        <p id="pwd-length-msg" class="alert-msg">비밀번호를 4글자이상 입력하세요.</p>
+
+        <button id="submit-btn" class="btn btn-primary btn-block" type="submit" disabled>회원가입</button>
+    </form>
+</div>
+</body>
+
+</html>
+
+<script>
+    function onSubmitSignUp(form) {
+        //TODO: ajax로 회원가입 정보 전송
+
+        return false;
+    }
+
+    function onChangeInput(input) {
+        //TODO: 각 필드 검증 올바르지 않은 필드는 해당 메시지 표출, 모든 필드 검증 되었는 지 체크
+        const name = input.name;
+        const attribute = name.substring('user'.length, name.length).toLowerCase();
+        const value = input.value;
+
+        switch (attribute) {
+            case "id":
+                break;
+            case "password":
+            case "validatepassword":
+                break;
+        }
+    }
+
+    function validateAttributeWithAjax(attribute, value) {
+        //TODO: ajax로 검증이 필요한 필드 검증
+    }
+
+    function isAllCheck() {
+        //TODO: 모든 필드가 검증이 되었는지 확인 후, 회원가입 버튼 활성화
+    }
+</script>
